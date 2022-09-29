@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Interview Details</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- Favicon -->
+<link rel="shortcut icon" href="/img/ojaslog.png" />
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="/img/ojaslog.png" />
+
+<!-- Plugin styles -->
+<link rel="stylesheet" href="/css/bundle.css" type="text/css">
+<link rel="stylesheet" href="/css/index.css" type="text/css">
+
+
+<!-- Plugin scripts -->
+<script type="text/javascript" src="/js/bundle.js"></script>
+<script type="text/javascript" src="/js/interview.js"></script>
+<script type="text/javascript" src="/js/interview_old.js"></script>
+<h1>
+	<center>Ojas Hiring Approval</center>
+</h1>
+</head>
+<body>
+	<nav class="navbar background h-nav-resp">
+		<ul class="nav-list v-class-resp">
+			<div class="logo">
+				<img src="img/ojaslog.png" alt="logo">
+			</div>
+			<li><a th:href="@{/home}">Home</a></li>
+		</ul>
+	</nav>
+
+	<!-- begin::main -->
+	<div layout:fragment="content">
+		<div id="addCurrencyDiv" class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12" style="padding-top: 80px;">
+						<form id="interviewform">
+							<div class="form-group row">
+								<div class="col-sm-3">
+									<label class="required">Hire Id</label> <input type="text"
+										id="iHireId" name="iHireId" placeholder="Eg:2110"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Hire Name</label> <input type="text"
+										id="iHireName" name="iHireName" placeholder="Eg:John"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Comment</label>
+									<textarea id="comment" name="comment"
+										placeholder="Eg: technically strong" class="form-control"
+										style="border-radius: 1rem;" maxlength="500"
+										required="required"></textarea>
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Author</label> <input type="text"
+										id="iAuthor" name="iAuthor" placeholder="Eg:panel name"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Author Role</label> <input type="text"
+										id="author_role" name="author_role" placeholder="Eg:magager"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Rating</label> <input type="text"
+										id="rating" name="rating" placeholder="Eg: 10/8"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<!-- <div class="col-sm-3">
+								<label class="required">CommentedOn</label> <textarea
+									id="commentDon" name="commentDon" placeholder="Eg: select/reject"
+									class="form-control" style="border-radius: 1rem;"
+									maxlength="500" required="required" ></textarea>
+							</div> -->
+
+								<div class="col-sm-3" id="submitbtnCurrencydiv">
+									<input type="submit" class="btn btn-primary btn-label-left"
+										id="submitbtnRegion" name="submitbtnRegion"
+										style="border-radius: 1rem; margin-top: 28px" value="Save">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

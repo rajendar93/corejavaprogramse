@@ -1,0 +1,501 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Hiring Approval App</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="all.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/bundle.js"></script>
+	<script type="text/javascript" src="/js/interview.js"></script>
+	<style>
+		.center {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+
+</head>
+
+<body>
+	<img src='img/logo.png' class="center" />
+	<div class="container tableResponsive">
+		<form id='searchForm'>
+			<div class="container">
+				<h2 class="text-center mt-4 mb-4">Hiring Approval App</h2>
+				<button class='btn btn-primary' onClick='newProfile("notifications0");'>Create New Profile</button>								
+				<div class="dropdown">
+					<input type="text" autocomplete="off" id="search_box" name="search_box"
+						class="form-control form-control-lg" placeholder="Search Using Employee ID Here..." id="search_box"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+						onkeyup="load_data(this,'/api/searchbyhireid/','search_result');" />
+					<p id='notifications0' style='font-size:32px;'></p><br />
+					<button class='btn btn-primary' onClick='populate("notifications0");'>Get Details</button>
+
+					<span id="search_result"></span>
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+	<div id='p1win' class="container tableResponsive">
+		<form id="interviewform">
+			<input type="hidden" id='interviewId' name='interviewId' />
+			<table class="table tableBordered mt-5">
+				<tr>
+					<th>Internal/External Hire:</th>
+					<td>
+						<select id='ie'>
+						</select>
+					</td>
+					<th>Date of Request:</th>
+					<td><input type="date" id='int_sch_date' value='' onChange='' /></td>
+				</tr>
+				<tr>
+					<th>Candidate Name</th>
+					<td><input type="text" value='' id='iHireName' name='iHireName' />
+					</td>
+					<th>EMP ID</th>
+					<td>
+						<input type="text" value='' id='iHireId' name='iHireId' />
+						<input type="hidden" id='comment' name='comment' />
+						<input type="hidden" id='iAuthor' name='iAuthor' value='HR' />
+						<input type="hidden" id='author_role' name='author_role' value='HR' />
+						<input type="hidden" id='rating' name='rating' value='0' />
+					</td>
+				</tr>
+				<tr>
+					<th>Hiring Manager</th>
+					<td><input type="text" id='hm' value='' onChange='' />
+					</td>
+					<th>Position:</th>
+					<td>
+						<select id='positions' value='' onChange=''>
+
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>Approved By:</th>
+					<td><input type="text" id='approvedBy' value='' onChange='' /></td>
+					<th>Technology:</th>
+					<td>
+						<!--input type="text" id='tech' value='' onkeyup="load_data(this,'/api/searchbyhireid/','search_result_tech');" onChange='' /-->
+						<input type="text" id='tech' value='' onChange='' />
+						<!--span id="search_result_tech"></span-->
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td></td>
+					<th>Profile Source:</th>
+					<td>
+						<select id='ps' value='' onChange=''>
+
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colSpan="2"><b>Hiring Objective purpose: </b><br /> <textarea class='textarea' value=''
+							id='hop'></textarea>
+					</td>
+					<td>
+						Budget:<br />
+						<input type="text" id='budget' name='budget' value=''>
+					</td>
+				</tr>
+				<tr>
+					<td colSpan="2">
+						Salary Negotiation Details:<br /> <textarea value='' id='snd' class='textarea'></textarea>
+					</td>
+					<td colSpan="2">
+						Negotiated CTC<br />
+						<input type="text" id='neg_ctc' name='neg_ctc' value=''>
+					</td>
+				</tr>
+				<tr>
+
+				</tr>
+				<tr>
+					<td colSpan="2">
+
+					</td>
+					<td>
+						Offered CTC:<br />
+						<input type="text" id='off_ctc' name='off_ctc' value=''>
+					</td>
+				</tr>
+				<tr>
+					<td colSpan="2">
+						<p id='notifications' style='font-size:32px;'></p><br />
+						<button id='pub1' class='btn btn-primary' onClick='phaseOne("notifications");'>Schedule
+							Interview</button>
+					</td>
+					<td>
+
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div id='p2win' class="container tableResponsive">
+		<form id="techInterviewForm">
+			<table border='1' class="table tableBordered table-margin table-width">
+				<tr>
+					<td>
+						<label><b>Tech Interviewer Name</b></label>
+						<br />
+						<input type="text" id='tech1_int' name='tech1_int' value='' onKeyUp='genHeader(this);' />
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						<label id='tech1_int_head'></label>
+						<br />
+						<textarea id='t1feed' rows="4" cols="50" class="textarea"></textarea>
+						<br />
+						<table border='1'>
+							<tr>
+								<th colspan='5'>Rating</th>
+							</tr>
+							<tr>
+								<td><input type="radio" id="t15" name="t1" value='5' /></td>
+								<td><input type="radio" id="t14" name="t1" value='4' /></td>
+								<td><input type="radio" id="t13" name="t1" value='3' /></td>
+								<td><input type="radio" id="t12" name="t1" value='2' /></td>
+								<td><input type="radio" id="t11" name="t1" value='1' /></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>4</td>
+								<td>3</td>
+								<td>2</td>
+								<td>1</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label><b>Status:</b></label>
+						<br />
+						<input type="text" id='t1-status' name="t1-status" list="statusList" />
+						<datalist id="statusList">
+							<option value="Selected">Selected</option>
+							<option value="Not-Selected">Not-Selected</option>
+						</datalist>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id='notifications2' style='font-size:32px;'></p><br />
+						<button id='pub2' class='btn btn-primary'
+							onClick="phaseTwo('techInterviewForm','tech1_int','t1feed','t1','t1-status','Tech-Interview-1','notifications2');">Publish
+							Tech Interview-1</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div id='p3win' class="container tableResponsive">
+		<form id="techInterviewForm2">
+			<table border='1' class="table tableBordered table-margin table-width">
+				<tr>
+					<td>
+						<label><b>Tech Interviewer Name</b></label>
+						<br />
+						<input type="text" id='tech2_int' name='tech2_int' value='' onKeyUp='genHeader(this);' />
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						<label id='tech2_int_head'></label>
+						<br />
+						<textarea id='t2feed' rows="4" cols="50" class="textarea"></textarea>
+						<br />
+						<table border='1'>
+							<tr>
+								<th colspan='5'>Rating</th>
+							</tr>
+							<tr>
+								<td><input type="radio" id="t25" name="t2" value='5' /></td>
+								<td><input type="radio" id="t24" name="t2" value='4' /></td>
+								<td><input type="radio" id="t23" name="t2" value='3' /></td>
+								<td><input type="radio" id="t22" name="t2" value='2' /></td>
+								<td><input type="radio" id="t21" name="t2" value='1' /></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>4</td>
+								<td>3</td>
+								<td>2</td>
+								<td>1</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label><b>Status:</b></label>
+						<br />
+						<input type="text" id='t2-status' name="t2-status" list="statusList" />
+						<datalist id="statusList">
+							<option value="Selected">Selected</option>
+							<option value="Not-Selected">Not-Selected</option>
+						</datalist>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id='notifications3' style='font-size:32px;'></p><br />
+						<button id='pub3' class='btn btn-primary'
+							onClick="phaseTwo('techInterviewForm2','tech2_int','t2feed','t2','t2-status','Tech-Interview-2','notifications3');">Publish
+							Tech Interview-2</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div id='p4win' class="container tableResponsive">
+		<form id="manInterviewForm">
+			<table border='1' class="table tableBordered table-margin table-width">
+				<tr>
+					<td>
+						<label><b>Manager Name</b></label>
+						<br />
+						<input type="text" id='man_int' name='man_int' value='' onKeyUp='genHeader(this);' />
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						<label id='man_int_head'></label>
+						<br />
+						<textarea id='manfeed' rows="4" cols="50" class="textarea"></textarea>
+						<br />
+						<table border='1'>
+							<tr>
+								<th colspan='5'>Rating</th>
+							</tr>
+							<tr>
+								<td><input type="radio" id="man5" name="man" value='5' /></td>
+								<td><input type="radio" id="man4" name="man" value='4' /></td>
+								<td><input type="radio" id="man3" name="man" value='3' /></td>
+								<td><input type="radio" id="man2" name="man" value='2' /></td>
+								<td><input type="radio" id="man1" name="man" value='1' /></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>4</td>
+								<td>3</td>
+								<td>2</td>
+								<td>1</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label><b>Status:</b></label>
+						<br />
+						<input type="text" id='man-status' name="man-status" list="statusList" />
+						<datalist id="statusList">
+							<option value="Selected">Selected</option>
+							<option value="Not-Selected">Not-Selected</option>
+						</datalist>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id='notifications4' style='font-size:32px;'></p><br />
+						<button id='pub4' class='btn btn-primary'
+							onClick="phaseTwo('manInterviewForm','man_int','manfeed','man','man-status','Man-Interview','notifications4');">Publish
+							Manager Interview</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div id='p5win' class="container tableResponsive">
+		<form id="hrInterviewForm">
+			<table border='1' class="table tableBordered table-margin table-width">
+				<tr>
+					<td>
+						<label><b>HR Name</b></label>
+						<br />
+						<input type="text" id='hr_int' name='hr_int' value='' onKeyUp='genHeader(this);' />
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						<label id='hr_int_head'></label>
+						<br />
+						<textarea id='hrfeed' rows="4" cols="50" class="textarea"></textarea>
+						<br />
+						<table border='1'>
+							<tr>
+								<th colspan='5'>Rating</th>
+							</tr>
+							<tr>
+								<td><input type="radio" id="hr5" name="hr" value='5' /></td>
+								<td><input type="radio" id="hr4" name="hr" value='4' /></td>
+								<td><input type="radio" id="hr3" name="hr" value='3' /></td>
+								<td><input type="radio" id="hr2" name="hr" value='2' /></td>
+								<td><input type="radio" id="hr1" name="hr" value='1' /></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>4</td>
+								<td>3</td>
+								<td>2</td>
+								<td>1</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label><b>Status:</b></label>
+						<br />
+						<input type="text" id='hr-status' name="hr-status" list="statusList" />
+						<datalist id="statusList">
+							<option value="Selected">Selected</option>
+							<option value="Not-Selected">Not-Selected</option>
+						</datalist>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id='notifications5' style='font-size:32px;'></p><br />
+						<button id='pub5' class='btn btn-primary'
+							onClick="phaseTwo('hrInterviewForm','hr_int','hrfeed','hr','hr-status','hr-Interview','notifications5');">Publish
+							HR Interview</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+<script>
+	$(window).on("load", GetAllProperties);
+
+	function GetAllProperties() {
+		loadAjaxCalls('/api/hiretype/getall', 'ie');
+		loadAjaxCalls('/api/profilesource/detailsall', 'ps');
+		loadAjaxCalls('/api/positions/getall', 'positions');
+	}
+	function loadAjaxCalls(apiUrl, keyElement, attrib) {
+		var ajax_request = new XMLHttpRequest();
+		ajax_request.open('GET', apiUrl);
+		ajax_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		ajax_request.send(null);
+		ajax_request.onreadystatechange = function () {
+			if (ajax_request.readyState == 4 && ajax_request.status == 200) {
+				console.log(ajax_request.responseText);
+				var response = JSON.parse(ajax_request.responseText);
+
+				var html = '';
+
+				if (response.length > 0) {
+					for (var count = 0; count < response.length; count++) {
+						var value = '';
+						if (keyElement === 'ie') {
+							value = response[count].hireType;
+						}
+						if (keyElement === 'ps') {
+							value = response[count].profilename;
+						}
+						if (keyElement === 'positions') {
+							value = response[count].positionname;
+						}
+						if (value.trim().length > 0) {
+							var option = document.createElement("option");
+							option.text = value;
+							option.value = value;
+							var select = document.getElementById(keyElement);
+							select.appendChild(option);
+						}
+
+					}
+				}
+				else {
+					var value = 'No Data Found';
+					var option = document.createElement("option");
+					option.text = value;
+					option.value = value;
+					var select = document.getElementById(keyElement);
+					select.appendChild(option);
+				}
+
+
+			}
+		}
+	}
+	function load_data(source, apiUrl, suggestBoxId) {
+		query = source.value;
+		sid = source.id;
+		if (query.length > 0) {
+			//var form_data = new FormData();
+
+			//form_data.append('query', query);
+
+			var ajax_request = new XMLHttpRequest();
+
+			ajax_request.open('GET', apiUrl + query);
+			ajax_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			ajax_request.send(null);
+
+			//ajax_request.send(form_data);
+
+			ajax_request.onreadystatechange = function () {
+				if (ajax_request.readyState == 4 && ajax_request.status == 200) {
+					//console.log(typeof ajax_request.responseText);
+					//console.log(ajax_request.responseText);
+					var response = JSON.parse(ajax_request.responseText);
+					//console.log(typeof response);
+					var html = '<div class="list-group">';
+
+					if (response.length > 0) {
+						for (var count = 0; count < response.length; count++) {
+							var hid = response[count].hireId + "(" + response[count].hireName + ")";
+							var int_id = "-Interview Id : " + response[count].id + "";
+							const d = new Date(response[count].commentedOn);
+							var pdate = "-Published On : " + d.toString() + "]"
+							html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this,' + sid + ',' + suggestBoxId + ')">' + hid + pdate + int_id + '</a>';
+						}
+					}
+					else {
+						html += '<a href="#" class="list-group-item list-group-item-action disabled">No Data Found</a>';
+					}
+
+					html += '</div>';
+
+					document.getElementById(suggestBoxId).innerHTML = html;
+				} else {
+					document.getElementById(suggestBoxId).innerHTML = '<font color="red">No Data Found</font>';
+				}
+			}
+		}
+		else {
+			document.getElementById(suggestBoxId).innerHTML = '';
+		}
+	}
+	function get_text(event, target, sbid) {
+		var string = event.textContent;
+		document.getElementById(target.id).value = string;
+		document.getElementById(sbid.id).innerHTML = '';
+	}
+</script>
+
+</html>

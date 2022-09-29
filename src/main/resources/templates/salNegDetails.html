@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Salary Negotiation Details</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="/img/ojaslog.png" />
+
+<!-- Plugin styles -->
+<link rel="stylesheet" href="/css/bundle.css" type="text/css">
+<link rel="stylesheet" href="/css/index.css" type="text/css">
+
+
+<!-- Plugin scripts -->
+<script type="text/javascript" src="/js/bundle.js"></script>
+
+<script type="text/javascript" src="/js/salNegDetails.js"></script>
+
+<h1>
+	<center>Ojas Hiring Approval</center>
+</h1>
+
+</head>
+<body>
+
+	<nav class="navbar background h-nav-resp">
+		<ul class="nav-list v-class-resp">
+			<div class="logo">
+				<img src="img/ojaslog.png" alt="logo">
+			</div>
+			<li><a th:href="@{/home}">Home</a></li>
+			
+		</ul>
+	</nav>
+	<!-- begin::main -->
+	<div layout:fragment="content">
+
+		<div id="addCurrencyDiv" class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12" style="padding-top: 80px;">
+						<form id="salnegform">
+							<div class="form-group row">
+								<div class="col-sm-3">
+									<label class="required">Hire Id</label> <input type="text"
+										id="hireId" name="hireId" placeholder="Eg:2110"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Budget</label> <input type="text"
+										id="budget" name="budget" placeholder="Eg:1000000"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Negotiated</label> <input type="text"
+										id="negotiated" name="negotiated" placeholder="Eg:50000"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Offered CTC</label> <input type="text"
+										id="offeredCTC" name="offeredCTC" placeholder="Eg:950000"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<div class="col-sm-3">
+									<label class="required">Token</label> <input type="text"
+										id="token" name="token" placeholder="Eg:interview id"
+										class="form-control" style="border-radius: 1rem;"
+										maxlength="20" required="required" />
+								</div>
+								<!-- <div>
+									<label class="required">Hire Date</label> <input type="date"
+										id="hireDate" name="hireDate" class="form-control"
+										style="border-radius: 1rem;" required="required" />
+								</div> -->
+								<div class="col-sm-3" id="submitbtnCurrencydiv">
+									<input type="submit" class="btn btn-primary btn-label-left"
+										id="submitbtnRegion" name="submitbtnRegion"
+										style="border-radius: 1rem; margin-top: 28px" value="Save">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
